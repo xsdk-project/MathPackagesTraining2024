@@ -1,6 +1,6 @@
 ---
 layout: package
-subheadline: ATPESC 2023 Package Overviews
+subheadline: ATPESC 2024 Package Overviews
 title: "deal.II"
 teaser: "An open source finite element library"
 permalink: "packages/deal2/"

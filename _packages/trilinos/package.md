@@ -1,6 +1,6 @@
 ---
 layout: package
-subheadline: ATPESC 2023 Package Overviews
+subheadline: ATPESC 2024 Package Overviews
 title: "Trilinos"
 teaser: "Optimal kernels to optimal solutions"
 permalink: "packages/trilinos/"

@@ -4,7 +4,7 @@ A gh-pages site to host SWC style training materials for various HPC math packag
 
 # Website
 
-The public site for this repo is https://xsdk-project.github.io/MathPackagesTraining2023/.
+The public site for this repo is https://xsdk-project.github.io/MathPackagesTraining2024/.
 After pushing to the Repo, changes should be visible within minutes.
 
 ## To Render Locally
@@ -16,14 +16,14 @@ install Ruby dependencies:
 bundle install
 ```
 
-Clone or move to the MathPackagesTraining2023 directory and start the Jekyll server:
+Clone or move to the MathPackagesTraining2024 directory and start the Jekyll server:
 
 ```
-git clone https://github.com/xsdk-project/MathPackagesTraining2023.git
+git clone https://github.com/xsdk-project/MathPackagesTraining2024.git
 bundle exec jekyll serve
 ```
 
-Then point your web broswer at http://localhost:4000/MathPackagesTraining2023/
+Then point your web broswer at http://localhost:4000/MathPackagesTraining2024/
 
 
 # ThetaGPU
@@ -90,12 +90,12 @@ With cmake - the likely option is: `-DCMAKE_CUDA_ARCHITECTURES=80`
 
 ## Install software
 
-Install software at `/eagle/projects/ATPESC2023/usr/MathPackages` - for ex: `/eagle/projects/ATPESC2023/usr/MathPackages/petsc-3.19.4`
+Install software at `/eagle/projects/ATPESC2024/usr/MathPackages` - for ex: `/eagle/projects/ATPESC2024/usr/MathPackages/petsc-3.19.4`
 
-And then copy over needed tutorial binaries, datafiles etc. over to `/eagle/projects/ATPESC2023/EXAMPLES/track-5-numerical` into appropriate folders - for ex: (from last year)
+And then copy over needed tutorial binaries, datafiles etc. over to `/eagle/projects/ATPESC2024/EXAMPLES/track-5-numerical` into appropriate folders - for ex: (from last year)
 
 ```
-balay@thetagpu06:~$ ls -l /eagle/projects/ATPESC2023/EXAMPLES/track-5-numerical
+balay@thetagpu06:~$ ls -l /eagle/projects/ATPESC2024/EXAMPLES/track-5-numerical
 total 40
 drwxrwsr-x 2 balay ATPESC_Instructors 4096 Aug  2 12:13 amrex
 drwxrwsr-x 2 balay ATPESC_Instructors 4096 Aug  2 12:13 hand_coded_heat

@@ -1,6 +1,6 @@
 ---
 layout: package
-subheadline: ATPESC 2023 Package Overviews
+subheadline: ATPESC 2024 Package Overviews
 title: "Omega_h"
 teaser: "GPU Accelerated Parallel Unstructured Mesh Interface"
 permalink: "packages/omegah/"

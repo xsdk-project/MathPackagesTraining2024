@@ -5,7 +5,7 @@ title: "Meshing and Discretization with AMReX"
 teaser: "A Block Structured Adaptive Mesh Refinement Framework"
 subheader: "Not your grandmother's AMR...!"
 permalink: "lessons/amrex/"
-years: [2023]
+years: [2024]
 use_math: true
 lesson: true
 header:
@@ -46,7 +46,7 @@ ssh -A elvis@theta.alcf.anl.gov
 2. In your home folder, create a local copy of the track 5 numerical examples:
 ```shell
 cd ~
-rsync -a /eagle/ATPESC2023/EXAMPLES/track-5-numerical .
+rsync -a /eagle/ATPESC2024/EXAMPLES/track-5-numerical .
 ```
 
 3. To access ThetaGPU resources, transfer to a GPU service node:
@@ -56,7 +56,7 @@ ssh thetagpusn1 # or thetagpusn2
 
 4. From the GPU service node, request a single-gpu reservation:
 ```shell
-qsub --attrs=filesystems=home,eagle -I -q single-gpu -t 60 -n 1 -A ATPESC2023
+qsub --attrs=filesystems=home,eagle -I -q single-gpu -t 60 -n 1 -A ATPESC2024
 ```
 
 5. Load OpenMPI:
