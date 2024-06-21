@@ -16,6 +16,8 @@ install Ruby dependencies:
 bundle install
 ```
 
+(See [this stackoverflow question](https://stackoverflow.com/questions/40385493/how-to-run-bundle-install-as-normal-user) if `bundle` complains about write permissions.)
+
 Clone or move to the MathPackagesTraining2024 directory and start the Jekyll server:
 
 ```
