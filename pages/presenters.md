@@ -243,6 +243,33 @@ permalink: "/presenters/"
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+### Vladimir Tomov
+### Vladimir Tomov
+
+|:---:|:---:|
+||Key Expertise: <br><br>Affiliation: <br><br>Contact: <br><br>GitHub: |
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+### Daniel Osei-Kuffuor
+### Daniel Osei-Kuffuor
+
+|:---:|:---:|
+||Key Expertise: <br><br>Affiliation: <br><br>Contact: <br><br>GitHub: |
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+### Weiqun Zhang
+### Weiqun Zhang
+
+|:---:|:---:|
+||Key Expertise: <br><br>Affiliation: <br><br>Contact: <br><br>GitHub: |
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 [amrex]: https://amrex-codes.github.io
 [xsdk]: https://xsdk.info
 [petsc]: https://petsc.org
