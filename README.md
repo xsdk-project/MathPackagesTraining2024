@@ -28,56 +28,51 @@ bundle exec jekyll serve
 Then point your web broswer at http://localhost:4000/MathPackagesTraining2024/
 
 
-# ThetaGPU
+# Polaris
 
 ## Accounts
 
-If you have an active ACLF account and are a member of atpesc_instructors, then
-you can access ThetaGPU node now. **Anyone who will be participating as an
+If you have an active ACLF account and are a member of ATPESC_Instructors, then
+you can access polaris node now. **Anyone who will be participating as an
 instructor and does not have an ALCF account or does not have access to the
-atpesc_instructors project should request access to those ASAP**.
+ATPESC_Instructors project should request access to those ASAP**.
+
+You need to be a part of two groups on polaris:
+
+- `ATPESC_Instructors`: to submit jobs on the account and for write access the installation directory for libraries, `/eagle/ATPESC2024/usr/MathPackages`
+- `ATPESC2024`: for write access to the examples directory `/eagle/ATPESC2024/EXAMPLES/track-5-numerical`
 
 ## Quick Start
+
+See also [Getting Started on Polaris](https://docs.alcf.anl.gov/polaris/getting-started/)
 
 To connect:
 
 ```
-ssh theta.alcf.anl.gov
-```
-To work on ThetaGPU resources, login to a Theta login node, and then
-hop on to one of the GPU service nodes:
-
-```
-ssh thetagpusn1  # or thetagpusn2
+ssh polaris.alcf.anl.gov
 ```
 
-The OS/compilers on the `thetagpusn1` and `thetagpusn2` are different
-then the compute nodes.
-Therefore, you will likely want to immediately move to the GPU node
-to build.
+All compute nodes [are the same](https://docs.alcf.anl.gov/polaris/hardware-overview/machine-overview/): a 32 core EPYC Milan 7543P node with 4 NVIDIA A100 GPUs connected via NVLink.
 
 To request an interactive session:
-```
-qsub -I -q single-gpu -t 60 -n 1 -A ATPESC_Instructors --attrs filesystems=home,eagle
-```
-
-The admin recommends using a newer OpenMPI module:
 
 ```
-module load openmpi/openmpi-4.1.4_ucx-1.12.1_gcc-9.4.0
+qsub -I -l select=1 -l filesystems=home:eagle -l walltime=1:00:00 -q debug -A ATPESC_Instructors
 ```
 
-For CMake:
+More control over running non-interactive jobs is described in [Running jobs on Polaris](https://docs.alcf.anl.gov/polaris/running-jobs/)
+
+### Modules
+
+The following module commands have been tested and found to work when building and installing both Trilinos and PETSc/TAO:
 
 ```
-module load cmake-3.20.3-gcc-9.3.0-57eqw4f
-```
-
-For blas, lapack the recommendation is to use blis, libflame (from aocl) - i.e:
-
-```
-module load aocl/blis/blis-3.2 aocl/libflame/libflame-3.2
-gcc -lflame -lblis
+module swap PrgEnv-nvhpc PrgEnv-gnu
+module load nvhpc-mixed craype-accel-nvidia80
+module use /soft/modulefiles
+module load spack-pe-base
+module load cmake ninja
+module load cray-libsci
 ```
 
 ## CUDA options
@@ -111,10 +106,9 @@ drwxrwsr-x 2 balay ATPESC_Instructors 4096 Aug  2 12:13 superlu
 drwxrwsr-x 2 balay ATPESC_Instructors 4096 Aug  2 12:13 time_integrators_sundials
 ```
 
-## Getting Started Guide
-
-The "getting started" guide for ThetaGPU can be found at
-https://www.alcf.anl.gov/support-center/theta-gpu-nodes/getting-started-thetagpu.
+It is recommended to use a compute node when building and installing, because parallel make is limited on login nodes, and because the login nodes do not have GPUs (though they do have the GPU compilers and environments: building on the host is possible as long as running code on the GPU is not required).
 
 
+## Internet proxy
 
+If you need internet access from a node (for instance, to download packages) add the proxy commands to your environment given [here](https://docs.alcf.anl.gov/polaris/getting-started/?h=proxy).
