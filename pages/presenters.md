@@ -265,7 +265,7 @@ permalink: "/presenters/"
 ### Weiqun Zhang
 
 |:---:|:---:|
-||Key Expertise: <br><br>Affiliation: <br><br>Contact: <br><br>GitHub: |
+|![](https://crd.lbl.gov/assets/Uploads/Zhang__FillWzE1MCwxNTBd.Weiqun.jpg)|Key Expertise: [AMReX][amrex]<br><br>Affiliation: [LBL][lbl]/[CCSE][lbl-ccse]<<br><br>Contact: [wz-m] <br><br>GitHub: [wz-g]|
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -344,6 +344,7 @@ permalink: "/presenters/"
 [gbh-m]: <mailto:gbharpe@sandia.gov>
 [cs-m]: <mailto:smithc11@rpi.edu>
 [vt-m]: <mailto:tomov2@llnl.gov>
+[wz-m]: <mailto:WeiqunZhang@lbl.gov>
 
 [lcm-g]: https://github.com/curfman
 [mcm-g]: https://github.com/markcmiller86
@@ -368,4 +369,5 @@ permalink: "/presenters/"
 [gbh-g]: https://github.com/GrahamBenHarper
 [cs-g]: https://github.com/cwsmith
 [vt-g]: https://github.com/vladotomov
+[wz-g]: https://github.com/WeiqunZhang
 
