@@ -247,7 +247,7 @@ permalink: "/presenters/"
 ### Vladimir Tomov
 
 |:---:|:---:|
-||Key Expertise: <br><br>Affiliation: <br><br>Contact: <br><br>GitHub: |
+|![](https://people.llnl.gov/sites/default/files/styles/medium/public/img/tomov2.png?itok=sIwMiN72){:width="200px"}|Key Expertise: Finite element methods for mult-material ALE models, mesh optimization, immersed mesh discretizations<br><br>Affiliation: [LLNL][llnl]<br><br>Contact: [email][vt-m]<br><br>GitHub: [Profile][vt-g]|
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -343,6 +343,7 @@ permalink: "/presenters/"
 [po-m]: <mailto:pohm@sandia.gov>
 [gbh-m]: <mailto:gbharpe@sandia.gov>
 [cs-m]: <mailto:smithc11@rpi.edu>
+[vt-m]: <mailto:tomov2@llnl.gov>
 
 [lcm-g]: https://github.com/curfman
 [mcm-g]: https://github.com/markcmiller86
@@ -366,4 +367,5 @@ permalink: "/presenters/"
 [po-g]: https://github.com/pohm01
 [gbh-g]: https://github.com/GrahamBenHarper
 [cs-g]: https://github.com/cwsmith
+[vt-g]: https://github.com/vladotomov
 
