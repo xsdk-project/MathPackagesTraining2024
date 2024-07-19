@@ -256,7 +256,7 @@ permalink: "/presenters/"
 ### Daniel Osei-Kuffuor
 
 |:---:|:---:|
-||Key Expertise: <br><br>Affiliation: <br><br>Contact: <br><br>GitHub: |
+|![](https://people.llnl.gov/sites/default/files/styles/medium/public/img/oseikuffuor1.png){:width="200px"}|Key Expertise: [hypre][hypre]<br><br>Affiliation: [LLNL][llnl]/[CASC][llnl-casc]<br><br>Contact: [do-m] <br><br>GitHub: |
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -265,7 +265,7 @@ permalink: "/presenters/"
 ### Weiqun Zhang
 
 |:---:|:---:|
-|![](https://crd.lbl.gov/assets/Uploads/Zhang__FillWzE1MCwxNTBd.Weiqun.jpg)|Key Expertise: [AMReX][amrex]<br><br>Affiliation: [LBL][lbl]/[CCSE][lbl-ccse]<<br><br>Contact: [wz-m] <br><br>GitHub: [wz-g]|
+|![](https://crd.lbl.gov/assets/Uploads/Zhang__FillWzE1MCwxNTBd.Weiqun.jpg){:width="200px"}|Key Expertise: [AMReX][amrex]<br><br>Affiliation: [LBL][lbl]/[CCSE][lbl-ccse]<<br><br>Contact: [wz-m] <br><br>GitHub: [wz-g]|
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -345,6 +345,7 @@ permalink: "/presenters/"
 [cs-m]: <mailto:smithc11@rpi.edu>
 [vt-m]: <mailto:tomov2@llnl.gov>
 [wz-m]: <mailto:WeiqunZhang@lbl.gov>
+[do-m]: <mailto:oseikuffuor1@llnl.gov>
 
 [lcm-g]: https://github.com/curfman
 [mcm-g]: https://github.com/markcmiller86
