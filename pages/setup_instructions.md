@@ -33,9 +33,14 @@ qsub -I -l select=1 -l filesystems=home:eagle -l walltime=1:00:00 -q debug -A AT
   * **Note 2:** One *cannot* (compile or) run the binaries on the frontends. Use the allocated node for such usage.
   * **Note 3:** Polaris job scheduling policies [document](https://docs.alcf.anl.gov/polaris/running-jobs/)
   * **Note 4:** To enable X windows for visualization on the compute node, you can open a new terminal and login to the allocated compute node by doing `ssh -Y polarisXY` (`polarisXY` is your compute node id)
-1. Load the required MPI, blas, lapack modules
+1. Load the required modules
 ```
-module load openmpi/openmpi-4.1.4_ucx-1.12.1_gcc-9.4.0 aocl/blis/blis-3.2 aocl/libflame/libflame-3.2
+module swap PrgEnv-nvhpc PrgEnv-gnu
+module load nvhpc-mixed craype-accel-nvidia80
+module use /soft/modulefiles
+module load spack-pe-base
+module load cmake ninja
+module load cray-libsci
 ```
 
 #### Miscellaneous ssh instructions
