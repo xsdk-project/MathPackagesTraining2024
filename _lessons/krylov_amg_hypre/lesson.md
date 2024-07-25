@@ -490,51 +490,51 @@ mpirun -np 1 ./ij -rotate -n 300 300 -eps 0.01 -alpha 45 -amgpcg
 mpirun -np 1 ./ij -rotate -n 300 300 -eps 0.01 -alpha 45 -amggmres
 ```
 ```
-mpirun -np 1 struct -rotate -n 300 300 -eps 0.01 -alpha 45 -pfmg
+mpirun -np 1 ./struct -rotate -n 300 300 -eps 0.01 -alpha 45 -pfmg
 ```
 ```
-mpirun -np 1 struct -rotate -n 300 300 -eps 0.01 -alpha 45 -pfmgpcg
+mpirun -np 1 ./struct -rotate -n 300 300 -eps 0.01 -alpha 45 -pfmgpcg
 ```
 ```
-mpirun -np 1 struct -rotate -n 300 300 -eps 0.01 -alpha 45 -pfmggmres
+mpirun -np 1 ./struct -rotate -n 300 300 -eps 0.01 -alpha 45 -pfmggmres
 ```
 
 {% include qanda question='Does the result change? What is the order of the solvers?' answer='The order from slowest to fastest is: PFMG, PFMG-GMRES, PFMG-CG, AMG, AMG-GMRES, AMG-CG. PFMG does not work well for non-grid-aligned anisotropies, but convergence improves when PFMG is combined with a Krylov solver. AMG can handle non-grid-aligned anisotropies well.' %}
 
 Now let us rotate the anisotropy by 30 degrees.
 ```
-mpirun -np 1 ij -rotate -n 300 300 -eps 0.01 -alpha 30 -amg
+mpirun -np 1 ./ij -rotate -n 300 300 -eps 0.01 -alpha 30 -amg
 ```
 ```
-mpirun -np 1 ij -rotate -n 300 300 -eps 0.01 -alpha 30 -amgpcg
+mpirun -np 1 ./ij -rotate -n 300 300 -eps 0.01 -alpha 30 -amgpcg
 ```
 ```
-mpirun -np 1 struct -rotate -n 300 300 -eps 0.01 -alpha 30 -pfmg
+mpirun -np 1 ./struct -rotate -n 300 300 -eps 0.01 -alpha 30 -pfmg
 ```
 ```
-mpirun -np 1 struct -rotate -n 300 300 -eps 0.01 -alpha 30 -pfmgpcg
+mpirun -np 1 ./struct -rotate -n 300 300 -eps 0.01 -alpha 30 -pfmgpcg
 ```
 
 {% include qanda question='Does the result change? What is the order of the solvers?' answer='The order from slowest to fastest is: PFMG, AMG, AMG-CG, PFMG-CG. While AMG is signifcantly better than PFMG, this problem is harder for it than the previous problem. PFMG-CG is faster here than AMG-CG.' %}
 
 Let us now scale up the problem for AMG-CG and PFMG-CG.
 ```
-mpirun -np 2 ij -P 2 1 -rotate -n 300 300 -eps 0.01 -alpha 30 -amgpcg
+mpirun -np 2 ./ij -P 2 1 -rotate -n 300 300 -eps 0.01 -alpha 30 -amgpcg
 ```
 ```
-mpirun -np 4 ij -P 2 2 -rotate -n 300 300 -eps 0.01 -alpha 30 -amgpcg
+mpirun -np 4 ./ij -P 2 2 -rotate -n 300 300 -eps 0.01 -alpha 30 -amgpcg
 ```
 ```
-mpirun -np 8 ij -P 4 2 -rotate -n 300 300 -eps 0.01 -alpha 30 -amgpcg
+mpirun -np 8 ./ij -P 4 2 -rotate -n 300 300 -eps 0.01 -alpha 30 -amgpcg
 ```
 ```
-mpirun -np 2 struct -P 2 1 1 -rotate -n 300 300 -eps 0.01 -alpha 30 -pfmgpcg
+mpirun -np 2 ./struct -P 2 1 1 -rotate -n 300 300 -eps 0.01 -alpha 30 -pfmgpcg
 ```
 ```
-mpirun -np 4 struct -P 2 2 1 -rotate -n 300 300 -eps 0.01 -alpha 30 -pfmgpcg
+mpirun -np 4 ./struct -P 2 2 1 -rotate -n 300 300 -eps 0.01 -alpha 30 -pfmgpcg
 ```
 ```
-mpirun -np 8 struct -P 4 2 1 -rotate -n 300 300 -eps 0.01 -alpha 30 -pfmgpcg
+mpirun -np 8 ./struct -P 4 2 1 -rotate -n 300 300 -eps 0.01 -alpha 30 -pfmgpcg
 ```
 
 {% include qanda question='How do the solvers scale?' answer='Both solvers scale well, with PFMG-CG taking more iterations, but overall less time than AMG-CG.' %}
@@ -553,37 +553,37 @@ For $$a = 0$$ we just get the Poisson equation, but when $$a > 0$$ we get a nons
 Now let us apply Krylov solvers to the convection-diffusion equation with $$a=10$$, starting with conjugate gradient.
 
 ```
-mpirun -np 1 ij -n 50 50 50 -difconv -a 10 -pcg
+mpirun -np 1 ./ij -n 50 50 50 -difconv -a 10 -pcg
 ```
 {% include qanda question='What do you observe? Why?' answer='PCG fails, because the linear system is nonsymmetric.' %}
 
 Now try GMRES(20), BiCGSTAB, and AMG with and without aggressive coarsening.
 ```
-mpirun -np 1 ij -n 50 50 50 -difconv -a 10 -gmres -k 20
+mpirun -np 1 ./ij -n 50 50 50 -difconv -a 10 -gmres -k 20
 ```
 ```
-mpirun -np 1 ij -n 50 50 50 -difconv -a 10 -bicgstab
+mpirun -np 1 ./ij -n 50 50 50 -difconv -a 10 -bicgstab
 ```
 ```
-mpirun -np 1 ij -n 50 50 50 -difconv -a 10 -amg
+mpirun -np 1 ./ij -n 50 50 50 -difconv -a 10 -amg
 ```
 ```
-mpirun -np 1 ij -n 50 50 50 -difconv -a 10 -amg -agg_nl 1
+mpirun -np 1 ./ij -n 50 50 50 -difconv -a 10 -amg -agg_nl 1
 ```
 {% include qanda question='What do you observe? Order the solvers in the order of slowest to fastest solver for this problem!' answer='BiCGSTAB, GMRES and AMG with or without aggressive coarsening solve the problem. The order slowest to fastest for this problem is: GMRES(20), AMG, BiCGSTAB, AMG with aggressive coarsening.' %}
 
 Let us solve the problem using structured multigrid solvers.
 ```
-mpirun -np 1 struct -n 50 50 50 -a 10 -pfmg
+mpirun -np 1 ./struct -n 50 50 50 -a 10 -pfmg
 ```
 ```
-mpirun -np 1 struct -n 50 50 50 -a 10 -pfmg -rap 1
+mpirun -np 1 ./struct -n 50 50 50 -a 10 -pfmg -rap 1
 ```
 ```
-mpirun -np 1 struct -n 50 50 50 -a 10 -pfmggmres
+mpirun -np 1 ./struct -n 50 50 50 -a 10 -pfmggmres
 ```
 ```
-mpirun -np 1 struct -n 50 50 50 -a 10 -pfmggmres -rap 1
+mpirun -np 1 ./struct -n 50 50 50 -a 10 -pfmggmres -rap 1
 ```
 
 {% include qanda question='What do you observe? Which solver fails? What is the order of the remaining solvers in terms of number of iterations? Which solver is the fastest.' answer='The non-Galerkin version of PFMG as alone solver fails. The order from largest to least number of iterations is: Non-Galerkin PFMG-GMRES, PFMG, PFMG-GMRES. But PFMG alone solves the problem faster.' %}
