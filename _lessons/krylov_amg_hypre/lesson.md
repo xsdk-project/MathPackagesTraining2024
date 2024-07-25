@@ -225,7 +225,7 @@ mpirun -np 1 ./ij -n 50 50 50 -amgpcg -P 1 1 1
 ```
 mpirun -np 8 ./ij -n 50 50 50 -amgpcg -P 2 2 2
 ```
-{% include qanda question='What happens to convergence and solve time now?' answer='Using PCG preconditioned with AMG further decreases the number of iterations and solve times.  Number of iterations: 8, 11.  Total time: 0.30, 0.71 seconds.' %}
+{% include qanda question='What happens to convergence and solve time now?' answer='Using PCG preconditioned with AMG further decreases the number of iterations and solve times.  Number of iterations: 8, 11.  Total time: 0.30, 0.70 seconds.' %}
 
 Now let us take a look at the complexities of the last run by printing some setup statistics:
 ```
@@ -381,20 +381,20 @@ To run the structured solver PFMG for this problem type
 ```
 mpirun -np 8 ./struct -n 50 50 50 -P 2 2 2 -pfmg
 ```
-{% include qanda question='How does the number of iterations and the time change?' answer='The number of iterations 35, but the total time is less (0.39)'  %}
+{% include qanda question='How does the number of iterations and the time change?' answer='The number of iterations 35, but the total time is less (0.26)'  %}
 
 Now run it as a preconditioner for conjugate gradient.
 ```
 mpirun -np 8 ./struct -n 50 50 50 -pfmgpcg -P 2 2 2
 ```
-{% include qanda question='How does the number of iterations and the time change?' answer='The number of iterations 14, but the total time is less (0.21)'  %}
+{% include qanda question='How does the number of iterations and the time change?' answer='The number of iterations 14, but the total time is less (0.15)'  %}
 
 To get even better total time, now run the non-Galerkin version.
 
 ```
 mpirun -np 8 ./struct -n 50 50 50 -pfmgpcg -P 2 2 2 -rap 1
 ```
-{% include qanda question='How does the number of iterations and the time change?' answer='The number of iterations remains 14, but the total time is less (0.17)'  %}
+{% include qanda question='How does the number of iterations and the time change?' answer='The number of iterations remains 14, but the total time is less (0.12)'  %}
 
 ### Third Set of Runs (Comparing GPU to CPU performance)
 
@@ -431,20 +431,20 @@ mpirun -np 16 ./struct -pfmgpcg -P 4 2 2 -gn 100 100 100
 ```
 mpirun -np 1 ./struct_gpu -pfmgpcg -gn 100 100 100
 ```
-{% include qanda question='How did the situation change?' answer='Now the GPU runs are faster than the CPU runs. We observe a speedup of about 4 for AMG-PCG and about 8 for PFMG-PCG. PFMG-PCG is significantly faster than AMG-PCG.' %}
+{% include qanda question='How did the situation change?' answer='Now the GPU runs are faster than the CPU runs. We observe a speedup of about 2 for AMG-PCG and for PFMG-PCG. PFMG-PCG is significantly faster than AMG-PCG.' %}
 
-We can find the cross-over point, at which CPU and GPU times are approximately the same, at 45 x 45 x 45.
+We can find the cross-over point, at which CPU and GPU times are approximately the same, at 80 x 80 x 80 for AMG-PCG and at 65 x 65 x 65 for PFMG-PCG.
 ```
-mpirun -np 16 ./ij -amgpcg -P 4 2 2 -gn 45 45 45
-```
-```
-mpirun -np 1 ./ij_gpu -amgpcg -gn 45 45 45
+mpirun -np 16 ./ij -amgpcg -P 4 2 2 -gn 80 80 80
 ```
 ```
-mpirun -np 16 ./struct -pfmgpcg -P 4 2 2 -gn 45 45 45
+mpirun -np 1 ./ij_gpu -amgpcg -gn 80 80 80
 ```
 ```
-mpirun -np 1 ./struct_gpu -pfmgpcg -gn 45 45 45
+mpirun -np 16 ./struct -pfmgpcg -P 4 2 2 -gn 65 65 65
+```
+```
+mpirun -np 1 ./struct_gpu -pfmgpcg -gn 65 65 65
 ```
 
 Let us now consider a diffusion problem with a 27-point stencil to see the effect of a system with a somewhat denser matrix on the performance.
@@ -454,9 +454,9 @@ mpirun -np 16 ./ij -amgpcg -P 4 2 2 -27pt -gn 100 100 100
 ```
 mpirun -np 1 ./ij_gpu -amgpcg -27pt -gn 100 100 100
 ```
-{% include qanda question='What speedup do we observe now?' answer='We now observe a speedup of about 11, which is much higher than the speedup 4 we got for the Laplace problem with a 7-point stencil.' %}
+{% include qanda question='What speedup do we observe now?' answer='We now observe a speedup of about 3.5, which is higher than the speedup 2 we got for the Laplace problem with a 7-point stencil.' %}
 
-Where is the cross-over point for this problem? Hint: Try -gn 25 25 25. Note that it is much lower than for the Laplace problem.
+Where is the cross-over point for this problem? Hint: Try -gn 62 62 62. Note that it is lower than for the Laplace problem.
 
 ### Additional Exercises 
 
