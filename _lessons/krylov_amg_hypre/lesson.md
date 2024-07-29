@@ -499,7 +499,7 @@ mpirun -np 1 ./struct -rotate -n 300 300 -eps 0.01 -alpha 45 -pfmgpcg
 mpirun -np 1 ./struct -rotate -n 300 300 -eps 0.01 -alpha 45 -pfmggmres
 ```
 
-{% include qanda question='Does the result change? What is the order of the solvers?' answer='The order from slowest to fastest is: PFMG, PFMG-GMRES, PFMG-CG, AMG, AMG-GMRES, AMG-CG. PFMG does not work well for non-grid-aligned anisotropies, but convergence improves when PFMG is combined with a Krylov solver. AMG can handle non-grid-aligned anisotropies well.' %}
+{% include qanda question='Does the result change? What is the order of the solvers with regard to time?' answer='The order from slowest to fastest is: PFMG, PFMG-GMRES, PFMG-CG, AMG, AMG-GMRES, AMG-CG. PFMG does not work well for non-grid-aligned anisotropies, but convergence improves when PFMG is combined with a Krylov solver. AMG can handle non-grid-aligned anisotropies well.' %}
 
 Now let us rotate the anisotropy by 30 degrees.
 ```
@@ -515,7 +515,7 @@ mpirun -np 1 ./struct -rotate -n 300 300 -eps 0.01 -alpha 30 -pfmg
 mpirun -np 1 ./struct -rotate -n 300 300 -eps 0.01 -alpha 30 -pfmgpcg
 ```
 
-{% include qanda question='Does the result change? What is the order of the solvers?' answer='The order from slowest to fastest is: PFMG, AMG, AMG-CG, PFMG-CG. While AMG is signifcantly better than PFMG, this problem is harder for it than the previous problem. PFMG-CG is faster here than AMG-CG.' %}
+{% include qanda question='Does the result change? What is the order of the solvers with regard to time?' answer='The order from slowest to fastest is: PFMG, AMG, AMG-CG, PFMG-CG. While AMG is signifcantly better than PFMG, this problem is harder for it than the previous problem. PFMG-CG is faster here than AMG-CG.' %}
 
 Let us now scale up the problem for AMG-CG and PFMG-CG.
 ```
@@ -537,7 +537,7 @@ mpirun -np 4 ./struct -P 2 2 1 -rotate -n 300 300 -eps 0.01 -alpha 30 -pfmgpcg
 mpirun -np 8 ./struct -P 4 2 1 -rotate -n 300 300 -eps 0.01 -alpha 30 -pfmgpcg
 ```
 
-{% include qanda question='How do the solvers scale?' answer='Both solvers scale well, with PFMG-CG taking more iterations, but overall less time than AMG-CG.' %}
+{% include qanda question='How do the solvers scale?' answer='Both solvers scale well with regard to iterations, with PFMG-CG taking more iterations, but overall less time than AMG-CG.' %}
 
 
 
