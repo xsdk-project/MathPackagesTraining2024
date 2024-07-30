@@ -446,7 +446,7 @@ mpirun -np 16 ./struct -pfmgpcg -P 4 2 2 -gn 200 200 200 -rap 1
 ```
 mpirun -np 1 ./struct_gpu -pfmgpcg -gn 200 200 200 -rap 1
 ```
-{% include qanda question='This is the problem shown in the slides. What speedups do you observe on Polaris compared to the results from Theta?' answer='Speedups are different on this architecture, which has a faster CPU than Theta had, but the general tendency of faster speedups GPU/CPU for PFMG than for AMG still holds.%}
+{% include qanda question='This is the problem shown in the slides. What speedups do you observe on Polaris compared to the results from Theta?' answer='Speedups are different on this architecture, which has a faster CPU than Theta had, but the general tendency of faster speedups GPU/CPU for PFMG than for AMG still holds.' %}
 
 We can find the cross-over point, at which CPU and GPU times are approximately the same, at 80 x 80 x 80 for AMG-PCG and at 65 x 65 x 65 for PFMG-PCG.
 ```
