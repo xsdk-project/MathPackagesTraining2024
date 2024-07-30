@@ -433,20 +433,20 @@ mpirun -np 1 ./struct_gpu -pfmgpcg -gn 100 100 100
 ```
 {% include qanda question='How did the situation change?' answer='Now the GPU runs are faster than the CPU runs. We observe a speedup of about 2 for AMG-PCG and for PFMG-PCG. PFMG-PCG is significantly faster than AMG-PCG.' %}
 
-Now let us consider a larger problem of size 200 x 200 x 200.
+Now let us consider the problem of size 200 x 200 x 200 that was presented in the slides. For optimal times we use aggressive coarsening for AMG and the non-Galerkin option for PFMG.
 ```
-mpirun -np 16 ./ij -amgpcg -P 4 2 2 -gn 200 200 200
-```
-```
-mpirun -np 1 ./ij_gpu -amgpcg -gn 200 200 200
+mpirun -np 16 ./ij -amgpcg -P 4 2 2 -gn 200 200 200 -agg_nl 1
 ```
 ```
-mpirun -np 16 ./struct -pfmgpcg -P 4 2 2 -gn 200 200 200
+mpirun -np 1 ./ij_gpu -amgpcg -gn 200 200 200 -agg_nl 1 
 ```
 ```
-mpirun -np 1 ./struct_gpu -pfmgpcg -gn 200 200 200
+mpirun -np 16 ./struct -pfmgpcg -P 4 2 2 -gn 200 200 200 -rap 1
 ```
-{% include qanda question='This is the problem shown in the slides. What speedups do you observe on Polaris compared to the results from Theta?' %}
+```
+mpirun -np 1 ./struct_gpu -pfmgpcg -gn 200 200 200 -rap 1
+```
+{% include qanda question='This is the problem shown in the slides. What speedups do you observe on Polaris compared to the results from Theta?' answer='Speedups are different on this architecture, which has a faster CPU than Theta had, but the general tendency of faster speedups GPU/CPU for PFMG than for AMG still holds.%}
 
 We can find the cross-over point, at which CPU and GPU times are approximately the same, at 80 x 80 x 80 for AMG-PCG and at 65 x 65 x 65 for PFMG-PCG.
 ```
