@@ -14,9 +14,10 @@ permalink: "/session_synopses/"
 [Slides](../files/ATPESC-2024-Track-5-Talk-1-Yang-IntroToNumericalSoftware.pdf)
 
 In the first hour of our day with you we will give a brief introduction
-to our agenda and logistics and an overview of the various numerical packages
+to our agenda, logistics and a very brief overview of the various numerical packages
 you will learn about. We will also discuss important components of computational science and
-engineering, exascale computing and the need for scientific software ecosystems.
+engineering and exascale computing. We will give an overview of the FASTMath Institute and the 
+Exascale Computing Project and its achievements.
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
