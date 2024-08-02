@@ -689,14 +689,14 @@ unset PETSC_OPTIONS
 
 We will run a large version (`-dm_refine 9`) of the driven cavity problem, using multigrid with GPU and SIMD-friendly Chebyshev-Jacobi smoothing (`-mg_levels_pc_type jacobi`), and collect a breakdown by multigrid level (`-pc_mg_log`), logging performance in a text file.
 
-We get the best CPU-only performance on ThetaGPU using 8 MPI ranks:
+We get the best CPU-only performance on polaris using 8 MPI ranks:
 ```
 mpiexec -n 8 ./ex19 -da_refine 9 -pc_type mg -mg_levels_pc_type jacobi -pc_mg_log -log_view :log_mg_cpu_n8.txt
 ```
 
-Running on GPU, we get best performance using only one rank (we could probably use more if running NVIDIA MPS, but this is not enabled on ThetaGPU):
+Running on GPUs, we get best performance using only one rank per GPU:
 ```
-mpiexec -n 1 ./ex19 -da_refine 9 -pc_type mg -mg_levels_pc_type jacobi -pc_mg_log -dm_vec_type cuda -dm_mat_type aijcusparse -log_view_gpu_time -log_view :log_mg_gpu_n1.txt
+mpiexec -n 4 ./ex19 -da_refine 9 -pc_type mg -mg_levels_pc_type jacobi -pc_mg_log -dm_vec_type cuda -dm_mat_type aijcusparse -log_view_gpu_time -log_view :log_mg_gpu_n4.txt
 ```
 
 (The `-log_view_gpu_time` option is required to get full timings for all events on the
