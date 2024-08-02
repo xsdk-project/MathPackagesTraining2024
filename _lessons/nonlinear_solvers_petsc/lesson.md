@@ -696,7 +696,7 @@ mpiexec -n 8 ./ex19 -da_refine 9 -pc_type mg -mg_levels_pc_type jacobi -pc_mg_lo
 
 Running on GPUs, we get best performance using only one rank per GPU:
 ```
-mpiexec -n 4 ./ex19 -da_refine 9 -pc_type mg -mg_levels_pc_type jacobi -pc_mg_log -dm_vec_type cuda -dm_mat_type aijcusparse -log_view_gpu_time -log_view :log_mg_gpu_n4.txt
+mpiexec -n 4 ./ex19 -da_refine 9 -pc_type mg -mg_levels_pc_type jacobi -pc_mg_log -dm_vec_type cuda -dm_mat_type aijcusparse -log_view_gpu_time -log_view :log_mg_gpu_n4.txt -use_gpu_aware_mpi 0
 ```
 
 (The `-log_view_gpu_time` option is required to get full timings for all events on the
@@ -724,7 +724,7 @@ mpiexec -n 8 ./ex19 -da_refine 9 -pc_type mg -mg_levels_pc_type jacobi -pc_mg_lo
 And on 1 MPI rank for the GPU case:
 
 ```
-mpiexec -n 1 ./ex19 -da_refine 9 -pc_type mg -mg_levels_pc_type jacobi -pc_mg_log -dm_vec_type cuda -dm_mat_type aijcusparse -log_view_gpu_time -log_view :log_mg_gpu_n1.stack:ascii_flamegraph
+mpiexec -n 1 ./ex19 -da_refine 9 -pc_type mg -mg_levels_pc_type jacobi -pc_mg_log -dm_vec_type cuda -dm_mat_type aijcusparse -log_view_gpu_time -log_view :log_mg_gpu_n1.stack:ascii_flamegraph -use_gpu_aware_mpi 0
 ```
 
 Download the .stack files to your local machine, and then use [SpeedScope.app](https://speedscope.app) to
@@ -757,7 +757,7 @@ If you'd like to try another GPU-back end, you can try PETSc's Kokkos/Kokkos Ker
 Run with `-dm_mat_type aijkokkos -dm_vec_type kokkos`:
 
 ```
-mpirun -n 1 ./ex19 -da_refine 9 -pc_type mg -mg_levels_pc_type jacobi -pc_mg_log -dm_vec_type kokkos -dm_mat_type aijkokkos -log_view_gpu_time -log_view :log_mg_kokkos_n1.txt
+mpirun -n 1 ./ex19 -da_refine 9 -pc_type mg -mg_levels_pc_type jacobi -pc_mg_log -dm_vec_type kokkos -dm_mat_type aijkokkos -log_view_gpu_time -log_view :log_mg_kokkos_n1.txt -use_gpu_aware_mpi 0
 ```
 
 #### Experimenting with different multigrid cycle types
