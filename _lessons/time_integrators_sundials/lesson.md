@@ -25,17 +25,14 @@ header:
 2. Change to the directory containing the precompiled executables, input files,
    and post processing scripts for this lesson:
    ```
-   cd track-5-numerical/time_integration_sundials/thetaGPU
+   cd track-5-numerical/time_integration_sundials
    ```
 
 3. For postprocessing output files load and activate conda:
    ```
-   module load conda/2022-07-01
-   conda activate
+   module load conda
+   conda activate base
    ```
-
-If you want to modify and rebuild the hands-on codes, the source files are
-located under `track-5-numerical/time_integration_sundials/SUNDIALS+AMReX`.
 
 The entire set of hands-on lesson codes is also available on
 [GitHub](https://github.com/AMReX-Codes/ATPESC-codes), under the
@@ -96,7 +93,7 @@ You can discover the full set of command-line options for each setup with
 the `help=1` argument, e.g.,
 
 ```text
-$ mpirun -n 1 ./HandsOn1.CUDA.exe help=1
+$ mpiexec -n 1 ./HandsOn1.CUDA.exe help=1
 Initializing CUDA...
 CUDA initialized with 1 GPU per MPI rank; 1 GPU(s) used in total
 Initializing SUNDIALS with 1 threads...
@@ -211,14 +208,14 @@ Run the first hands-on code using its default parameters (note that this uses a
 mesh size of $$128^2$$ and fixed time step size of 5.0),
 
 ```bash
-mpirun -n 1 ./HandsOn1.CUDA.exe inputs-1
+mpiexec -n 1 ./HandsOn1.CUDA.exe inputs-1
 ```
 
 and compare the final result against a stored reference solution (again on a
 $$128^2$$ grid),
 
 ```bash
-mpirun -n 1 ./fcompare plt00001/ reference_solution/
+mpiexec -n 1 ./fcompare plt00001/ reference_solution/
 ```
 
 Notice that the computed solution error is rather small (the solution has
@@ -227,14 +224,14 @@ magnitude $$\mathcal{O}(1)$$, so we hope for errors well below 0.1).
 Now re-run this hands-on code using a larger time step size of 25.0,
 
 ```bash
-mpirun -n 1 ./HandsOn1.CUDA.exe inputs-1 fixed_dt=25.0
+mpiexec -n 1 ./HandsOn1.CUDA.exe inputs-1 fixed_dt=25.0
 ```
 
 _the code now runs 5x faster._ However, if we check the accuracy of the
 computed solution,
 
 ```bash
-mpirun -n 1 ./fcompare plt00001/ reference_solution/
+mpiexec -n 1 ./fcompare plt00001/ reference_solution/
 ```
 
 we see it has an incredibly large error (mine was $$\mathcal{O}(10^{98})$$).
@@ -253,8 +250,8 @@ With this executable, we may switch to adaptive time-stepping (with the default
 tolerances, $$rtol=10^{-4}$$ and $$atol=10^{-9}$$) by specifying `fixed_dt=0`,
 
 ```bash
-mpirun -n 1 ./HandsOn1.CUDA.exe inputs-1 fixed_dt=0
-mpirun -n 1 ./fcompare plt00001/ reference_solution/
+mpiexec -n 1 ./HandsOn1.CUDA.exe inputs-1 fixed_dt=0
+mpiexec -n 1 ./fcompare plt00001/ reference_solution/
 ```
 
 _note how rapidly the executable finishes, providing a solution that is both
@@ -276,11 +273,11 @@ the raw percentage of these failed steps remains rather small.
 ./process_ARKStep_diags.py HandsOn1_diagnostics.txt
 ```
 
-*We included it here because it can be difficult to display graphics from the GPU compute nodes on Theta.*
+*We included it here because it can be difficult to display graphics from the GPU compute nodes on Polaris.*
 
 
 Run the code a few more times with various values of `rtol` (e.g.,
-`mpirun -n 1 ./HandsOn1.CUDA.exe inputs-1 fixed_dt=0 rtol=1e-6`) -- how well does the adaptivity
+`mpiexec -n 1 ./HandsOn1.CUDA.exe inputs-1 fixed_dt=0 rtol=1e-6`) -- how well does the adaptivity
 algorithm produce solutions within the desired tolerances?  How do the number of
 time steps change as different tolerances are requested?
 
@@ -291,8 +288,8 @@ are included (explicit methods have available orders 2 through 8). Alternate
 orders of accuracy may be run with the `arkode_order` option, e.g.,
 
 ```bash
-mpirun -n 1 ./HandsOn1.CUDA.exe inputs-1 fixed_dt=0 arkode_order=8
-mpirun -n 1 ./fcompare plt00001/ reference_solution/
+mpiexec -n 1 ./HandsOn1.CUDA.exe inputs-1 fixed_dt=0 arkode_order=8
+mpiexec -n 1 ./fcompare plt00001/ reference_solution/
 ```
 
 _note the dramatic decrease in overall time steps (462 vs 260), but the
@@ -346,8 +343,8 @@ Run the second hands-on code using its default parameters (this also uses a mesh
 size of $$128^2$$ and fixed time step size of 5.0),
 
 ```bash
-mpirun -n 1 ./HandsOn2.CUDA.exe inputs-2
-mpirun -n 1 ./fcompare plt00001/ reference_solution/
+mpiexec -n 1 ./HandsOn2.CUDA.exe inputs-2
+mpiexec -n 1 ./fcompare plt00001/ reference_solution/
 ```
 
 _note that this takes significantly longer than `HandsOn1.CUDA.exe` with the
@@ -356,8 +353,8 @@ same time step size._
 Re-run this problem using the larger time step size of 100.0,
 
 ```bash
-mpirun -n 1 ./HandsOn2.CUDA.exe inputs-2 fixed_dt=100.0
-mpirun -n 1 ./fcompare plt00001/ reference_solution/
+mpiexec -n 1 ./HandsOn2.CUDA.exe inputs-2 fixed_dt=100.0
+mpiexec -n 1 ./fcompare plt00001/ reference_solution/
 ```
 
 _again this version runs much more quickly, but now the results are usable!_
@@ -379,7 +376,7 @@ As with the previous hands-on exercise, we can switch to adaptive time-stepping
 `fixed_dt=0`,
 
 ```bash
-mpirun -n 1 ./HandsOn2.CUDA.exe inputs-2 fixed_dt=0
+mpiexec -n 1 ./HandsOn2.CUDA.exe inputs-2 fixed_dt=0
 ```
 
 Compute the solution error as before,
@@ -415,15 +412,15 @@ However, this can instead be run with the advection terms
 $$\vec{a} \cdot \nabla u$$ treated explicitly by specifying `rhs_adv=1`, i.e.
 
 ```bash
-mpirun -n 1 ./HandsOn2.CUDA.exe inputs-2 rhs_adv=1
-mpirun -n 1 ./fcompare plt00001/ reference_solution/
+mpiexec -n 1 ./HandsOn2.CUDA.exe inputs-2 rhs_adv=1
+mpiexec -n 1 ./fcompare plt00001/ reference_solution/
 ```
 
 For comparison, re-run an identical test but with fully-implicit treatment,
 
 ```bash
-mpirun -n 1 ./HandsOn2.CUDA.exe inputs-2
-mpirun -n 1 ./fcompare plt00001/ reference_solution/
+mpiexec -n 1 ./HandsOn2.CUDA.exe inputs-2
+mpiexec -n 1 ./fcompare plt00001/ reference_solution/
 ```
 
 Do you notice any efficiency or accuracy differences between fully implicit and
@@ -453,17 +450,14 @@ error each time -- can you find a maximum stable step size?
 We can again run the code using adaptive time stepping,
 
 ```bash
-mpirun -n 1 ./HandsOn2.CUDA.exe inputs-2 rhs_adv=1 fixed_dt=0
-mpirun -n 1 ./fcompare plt00001/ reference_solution/
+mpiexec -n 1 ./HandsOn2.CUDA.exe inputs-2 rhs_adv=1 fixed_dt=0
+mpiexec -n 1 ./fcompare plt00001/ reference_solution/
 ```
 
 The corresponding stepsize history plot with this configuration is below, and shows
 similar behavior as we saw with the explicit method above.
 
 [![ImEx stepsize adaptivity ::](h_vs_iter-imex.png)](sundials/h_vs_iter-imex.png)
-
-
-
 
 ----
 
@@ -496,58 +490,13 @@ larger spatial meshes and parallel architectures than we have used in this demo.
 
 ## Evening Hands-on Session -- Preconditioning
 
-This lesson uses the Theta KNL nodes (rather than ThetaGPU) and `HandsOn3.exe`
-to explore the following topics:
+This lesson uses `HandsOn3.exe` to explore the following topics:
 
 1. Preconditioner specification
 
 2. Performance for IMEX time integrators
 
 3. Performance for fully implicit time integrators
-
-### Theta Setup Instructions
-
-1. Connect to Theta:
-   ```
-   ssh [username]@theta.alcf.anl.gov
-   ```
-
-2. If you have not already done so, create a copy of the hands-on lessons
-   ```
-   cd ~
-   rsync -a /eagle/ATPESC2024/EXAMPLES/track-5-numerical .
-   ```
-
-3. Request an interactive session on Theta:
-   ```
-   qsub-knl -I -q ATPESC2024 -t 60 -n 1 -A ATPESC2024
-   ```
-
-4. Load the GNU programming environment, CMake, and conda modules:
-   ```
-   module swap PrgEnv-intel PrgEnv-gnu
-   module load conda/2021-09-22
-   ```
-
-5. Change to the directory containing the precompiled executables, input files,
-   and post processing scripts for this lesson:
-   ```
-   cd track-5-numerical/time_integration_sundials/thetaKNL
-   ```
-
-If you want to modify and rebuild the hands-on code, the source files are
-located under `track-5-numerical/time_integration_sundials/SUNDIALS+AMReX` and
-can be compiled using the provided configuration script:
-```
-module load cmake/3.20.4
-./config_atpesc_theta.sh
-cd build
-make -j
-```
-
-The entire set of hands-on lesson codes is also available on
-[GitHub](https://github.com/AMReX-Codes/ATPESC-codes), under the
-`SUNDIALS+AMReX` directory.
 
 ### Preconditioner Specification
 
@@ -588,13 +537,13 @@ two steps:
 Run `HandsOn3.exe` using the default parameters,
 
 ```bash
-aprun -n 1 -N 1 ./HandsOn3.exe inputs-3
+mpiexec -n 1 -N 1 ./HandsOn3.exe inputs-3
 ```
 
 and again with preconditioning disabled,
 
 ```bash
-aprun -n 1 -N 1 ./HandsOn3.exe inputs-3 use_preconditioner=0
+mpiexec -n 1 -N 1 ./HandsOn3.exe inputs-3 use_preconditioner=0
 ```
 
 Note that the preconditioned version takes longer to run on this coarse problem,
@@ -608,7 +557,7 @@ will deteriorate rapidly.
 Re-run `HandsOn3.exe` using a fully-implicit problem formulation,
 
 ```bash
-aprun -n 1 -N 1 ./HandsOn3.exe inputs-3 rhs_adv=1
+mpiexec -n 1 -N 1 ./HandsOn3.exe inputs-3 rhs_adv=1
 ```
 
 Recall that this preconditioner only "preconditions" the diffusion portion of
@@ -625,7 +574,7 @@ fully implicit is yours. It is recommended that you submit a job script use the
 batch queue instead of running interactively. Produce a weak scaling plot with
 these results.
 
-See the Theta job submission [documentation](https://www.alcf.anl.gov/support-center/theta/running-jobs-and-submission-scripts)
+See the Polaris job submission [documentation](https://docs.alcf.anl.gov/polaris/running-jobs/)
 for more details on writing and running job scripts.
 
 ### Further Reading
@@ -633,19 +582,19 @@ for more details on writing and running job scripts.
 [SUNDIALS Documentation](https://sundials.readthedocs.io)
 
 [0]: https://computing.llnl.gov/projects/sundials/arkode
-[1]: https://computation.llnl.gov/projects/sundials
+[1]: https://computing.llnl.gov/projects/sundials
 [2]: https://amrex-codes.github.io/amrex
 [3]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn1.cpp
 [4]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn2.cpp
 [5]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn3.cpp
 [6]: https://github.com/AMReX-Codes/amrex/blob/development/Src/Extern/SUNDIALS/AMReX_NVector_MultiFab.H
 [7]: https://github.com/AMReX-Codes/amrex/blob/development/Src/Extern/SUNDIALS/AMReX_NVector_MultiFab.cpp
-[8]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn_main.cpp#L285
-[9]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn_main.cpp#L75-L78
-[10]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn1.cpp#L57
+[8]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn_main.cpp#L286
+[9]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn_main.cpp#L71-L76
+[10]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn1.cpp#L59-L60
 [11]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn1.cpp#L88
-[12]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn2.cpp#L60-L73
-[13]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn2.cpp#L98-L101
-[14]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn_main.cpp#L458
-[15]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn3.cpp#L103-L110
-[16]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn3.cpp#L122
+[12]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn2.cpp#L62-L75
+[13]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn2.cpp#L100-L103
+[14]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn_main.cpp#L468
+[15]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn3.cpp#L105-L112
+[16]: https://github.com/AMReX-Codes/ATPESC-codes/blob/main/SUNDIALS%2BAMReX/HandsOn3.cpp#L124
