@@ -139,7 +139,7 @@ permalink: "/presenters/"
 ### Ulrike Yang
 
 |:---:|:---:|
-|![](https://avatars2.githubusercontent.com/u/16307629?s=400&v=4){:width="200px"}|Key Expertise: [hypre][hypre], [FASTMath][fastmath], [xSDK][xsdk]<br><br>Affiliation: [LLNL][llnl]/[CASC][llnl-casc]<br><br>Contact: [email][sl-m]<br><br>GitHub: [Profile][sl-g]|
+|![](https://avatars2.githubusercontent.com/u/16307629?s=400&v=4){:width="200px"}|Key Expertise: [hypre][hypre], [FASTMath][fastmath], [xSDK][xsdk]<br><br>Affiliation: [LLNL][llnl]/[CASC][llnl-casc]<br><br>Contact: [email][uy-m]<br><br>GitHub: [Profile][uy-g]|
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
