@@ -28,17 +28,18 @@ rsync -a {{site.handson_install_root}}/{{site.handson_root}} .
 this command to update your local copy if we discover changes are necessary.
 1. Schedule a Polaris compute node for compiles and runs
 ```
-qsub -I -l select=1 -l filesystems=home:eagle -l walltime=1:00:00 -q debug -A ATPESC2024
+qsub -I -l select=1 -l filesystems=home:eagle -l walltime=1:00:00 -q ATPESC -A ATPESC2024
 ```
-  * **Note 2:** One *cannot* (compile or) run the binaries on the frontends. Use the allocated node for such usage.
-  * **Note 3:** Polaris job scheduling policies [document](https://docs.alcf.anl.gov/polaris/running-jobs/)
-  * **Note 4:** To enable X windows for visualization on the compute node, you can open a new terminal and login to the allocated compute node by doing `ssh -Y polarisXY` (`polarisXY` is your compute node id)
+  * **Note 1:** Polaris job scheduling policies [document](https://docs.alcf.anl.gov/polaris/running-jobs/)
+  * **Note 2:** Polaris ATPESC Instructions at [document](https://extremecomputingtraining.anl.gov/wp-content/uploads/sites/96/2024/07/ATPESC-2024-Track-0-Talk-2-Kwack-Quick-Start.pdf)
+  * **Note 3:** Polaris ATPESC Reservation info at [document](https://anl.app.box.com/notes/1598442469896?s=85yff37myqlrh3dkvl77l8zhqmsizy5j)
 1. Load the default modules for the lessons
 ```
 module use /soft/modulefiles
 module use /eagle/ATPESC2024/usr/modulefiles
 module load track-5-numerical
 ```
+  * **Note 1:** Proxy settings for network access from compute nodes is at [document](https://docs.alcf.anl.gov/polaris/getting-started/?h=proxy#proxy)
 
 #### Miscellaneous ssh instructions
 
