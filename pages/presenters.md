@@ -265,7 +265,7 @@ permalink: "/presenters/"
 ### Weiqun Zhang
 
 |:---:|:---:|
-|![](https://crd.lbl.gov/assets/Uploads/Zhang__FillWzE1MCwxNTBd.Weiqun.jpg){:width="200px"}|Key Expertise: [AMReX][amrex]<br><br>Affiliation: [LBL][lbl]/[CCSE][lbl-ccse]<<br><br>Contact: [wz-m] <br><br>GitHub: [wz-g]|
+|![](https://crd.lbl.gov/assets/Uploads/Zhang__FillWzE1MCwxNTBd.Weiqun.jpg){:width="200px"}|Key Expertise: [AMReX][amrex]<br><br>Affiliation: [LBL][lbl]/[CCSE][lbl-ccse]<br><br>Contact: [wz-m] <br><br>GitHub: [wz-g]|
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
