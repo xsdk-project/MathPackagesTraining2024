@@ -85,7 +85,7 @@ We will investigate this problem in three phases:
 
 2. Implicit / implicit-explicit (IMEX) time integration ([HandsOn2.cpp][4], `HandsOn2.CUDA.exe`)
 
-3. Preconditioning ([HandsOn3.cpp][5], `HandsOn3.exe` -- optional)
+3. Preconditioning ([HandsOn3.cpp][5], `HandsOn3.CUDA.exe` -- optional)
 
 ### Getting Help
 
@@ -93,14 +93,19 @@ You can discover the full set of command-line options for each setup with
 the `help=1` argument, e.g.,
 
 ```text
-$ mpiexec -n 1 ./HandsOn1.CUDA.exe help=1
-Initializing CUDA...
-CUDA initialized with 1 GPU per MPI rank; 1 GPU(s) used in total
-Initializing SUNDIALS with 1 threads...
-SUNDIALS initialized.
+mpiexec -n 1 ./HandsOn1.CUDA.exe help=1
+```
+
+which should produce output like the following:
+```test
+Initializing AMReX (24.08)...
 MPI initialized with 1 MPI processes
 MPI initialized with thread support level 0
-AMReX (22.08-dirty) initialized
+Initializing CUDA...
+CUDA initialized with 1 device.
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (24.08) initialized
 
 Usage: HandsOn1.exe [fname] [options]
 Options:
@@ -208,14 +213,14 @@ Run the first hands-on code using its default parameters (note that this uses a
 mesh size of $$128^2$$ and fixed time step size of 5.0),
 
 ```bash
-mpiexec -n 1 ./HandsOn1.CUDA.exe inputs-1
+mpiexec -n 4 ./HandsOn1.CUDA.exe inputs-1
 ```
 
 and compare the final result against a stored reference solution (again on a
 $$128^2$$ grid),
 
 ```bash
-mpiexec -n 1 ./fcompare plt00001/ reference_solution/
+./amrex_fcompare plt00001/ reference_solution/
 ```
 
 Notice that the computed solution error is rather small (the solution has
@@ -224,14 +229,14 @@ magnitude $$\mathcal{O}(1)$$, so we hope for errors well below 0.1).
 Now re-run this hands-on code using a larger time step size of 25.0,
 
 ```bash
-mpiexec -n 1 ./HandsOn1.CUDA.exe inputs-1 fixed_dt=25.0
+mpiexec -n 4 ./HandsOn1.CUDA.exe inputs-1 fixed_dt=25.0
 ```
 
-_the code now runs 5x faster._ However, if we check the accuracy of the
+_the code now runs much faster._ However, if we check the accuracy of the
 computed solution,
 
 ```bash
-mpiexec -n 1 ./fcompare plt00001/ reference_solution/
+./amrex_fcompare plt00001/ reference_solution/
 ```
 
 we see it has an incredibly large error (mine was $$\mathcal{O}(10^{98})$$).
@@ -250,8 +255,8 @@ With this executable, we may switch to adaptive time-stepping (with the default
 tolerances, $$rtol=10^{-4}$$ and $$atol=10^{-9}$$) by specifying `fixed_dt=0`,
 
 ```bash
-mpiexec -n 1 ./HandsOn1.CUDA.exe inputs-1 fixed_dt=0
-mpiexec -n 1 ./fcompare plt00001/ reference_solution/
+mpiexec -n 4 ./HandsOn1.CUDA.exe inputs-1 fixed_dt=0
+./amrex_fcompare plt00001/ reference_solution/
 ```
 
 _note how rapidly the executable finishes, providing a solution that is both
@@ -277,8 +282,8 @@ the raw percentage of these failed steps remains rather small.
 
 
 Run the code a few more times with various values of `rtol` (e.g.,
-`mpiexec -n 1 ./HandsOn1.CUDA.exe inputs-1 fixed_dt=0 rtol=1e-6`) -- how well does the adaptivity
-algorithm produce solutions within the desired tolerances?  How do the number of
+`mpiexec -n 4 ./HandsOn1.CUDA.exe inputs-1 fixed_dt=0 rtol=1e-6`) -- how well does the adaptivity
+algorithm produce solutions within the desired tolerances? How do the number of
 time steps change as different tolerances are requested?
 
 ### Integrator Order and Efficiency
@@ -288,12 +293,12 @@ are included (explicit methods have available orders 2 through 8). Alternate
 orders of accuracy may be run with the `arkode_order` option, e.g.,
 
 ```bash
-mpiexec -n 1 ./HandsOn1.CUDA.exe inputs-1 fixed_dt=0 arkode_order=8
-mpiexec -n 1 ./fcompare plt00001/ reference_solution/
+mpiexec -n 4 ./HandsOn1.CUDA.exe inputs-1 fixed_dt=0 arkode_order=8
+./amrex_fcompare plt00001/ reference_solution/
 ```
 
 _note the dramatic decrease in overall time steps (462 vs 260), but the
-accompanying increase in total RHS evaluations (2900 vs 3790)._ Although
+accompanying increase in total RHS evaluations (2413 vs 3759)._ Although
 higher-order methods may indeed utilize larger step sizes (both for accuracy and
 frequently stability), those come at the cost of increased work per step.
 
@@ -343,8 +348,8 @@ Run the second hands-on code using its default parameters (this also uses a mesh
 size of $$128^2$$ and fixed time step size of 5.0),
 
 ```bash
-mpiexec -n 1 ./HandsOn2.CUDA.exe inputs-2
-mpiexec -n 1 ./fcompare plt00001/ reference_solution/
+mpiexec -n 4 ./HandsOn2.CUDA.exe inputs-2
+./amrex_fcompare plt00001/ reference_solution/
 ```
 
 _note that this takes significantly longer than `HandsOn1.CUDA.exe` with the
@@ -353,8 +358,8 @@ same time step size._
 Re-run this problem using the larger time step size of 100.0,
 
 ```bash
-mpiexec -n 1 ./HandsOn2.CUDA.exe inputs-2 fixed_dt=100.0
-mpiexec -n 1 ./fcompare plt00001/ reference_solution/
+mpiexec -n 4 ./HandsOn2.CUDA.exe inputs-2 fixed_dt=100.0
+./amrex_fcompare plt00001/ reference_solution/
 ```
 
 _again this version runs much more quickly, but now the results are usable!_
@@ -376,13 +381,13 @@ As with the previous hands-on exercise, we can switch to adaptive time-stepping
 `fixed_dt=0`,
 
 ```bash
-mpiexec -n 1 ./HandsOn2.CUDA.exe inputs-2 fixed_dt=0
+mpiexec -n 4 ./HandsOn2.CUDA.exe inputs-2 fixed_dt=0
 ```
 
 Compute the solution error as before,
 
 ```bash
-./fcompare plt00001/ reference_solution/
+./amrex_fcompare plt00001/ reference_solution/
 ```
 
 The corresponding time adaptivity history plot is below:
@@ -412,15 +417,15 @@ However, this can instead be run with the advection terms
 $$\vec{a} \cdot \nabla u$$ treated explicitly by specifying `rhs_adv=1`, i.e.
 
 ```bash
-mpiexec -n 1 ./HandsOn2.CUDA.exe inputs-2 rhs_adv=1
-mpiexec -n 1 ./fcompare plt00001/ reference_solution/
+mpiexec -n 4 ./HandsOn2.CUDA.exe inputs-2 rhs_adv=1
+./amrex_fcompare plt00001/ reference_solution/
 ```
 
 For comparison, re-run an identical test but with fully-implicit treatment,
 
 ```bash
-mpiexec -n 1 ./HandsOn2.CUDA.exe inputs-2
-mpiexec -n 1 ./fcompare plt00001/ reference_solution/
+mpiexec -n 4 ./HandsOn2.CUDA.exe inputs-2
+./amrex_fcompare plt00001/ reference_solution/
 ```
 
 Do you notice any efficiency or accuracy differences between fully implicit and
@@ -450,8 +455,8 @@ error each time -- can you find a maximum stable step size?
 We can again run the code using adaptive time stepping,
 
 ```bash
-mpiexec -n 1 ./HandsOn2.CUDA.exe inputs-2 rhs_adv=1 fixed_dt=0
-mpiexec -n 1 ./fcompare plt00001/ reference_solution/
+mpiexec -n 4 ./HandsOn2.CUDA.exe inputs-2 rhs_adv=1 fixed_dt=0
+./amrex_fcompare plt00001/ reference_solution/
 ```
 
 The corresponding stepsize history plot with this configuration is below, and shows
@@ -490,7 +495,7 @@ larger spatial meshes and parallel architectures than we have used in this demo.
 
 ## Evening Hands-on Session -- Preconditioning
 
-This lesson uses `HandsOn3.exe` to explore the following topics:
+This lesson uses `HandsOn3.CUDA.exe` to explore the following topics:
 
 1. Preconditioner specification
 
@@ -534,16 +539,16 @@ two steps:
 
 ### Performance with IMEX Integration
 
-Run `HandsOn3.exe` using the default parameters,
+Run `HandsOn3.CUDA.exe` using the default parameters,
 
 ```bash
-mpiexec -n 1 -N 1 ./HandsOn3.exe inputs-3
+mpiexec -n 4 ./HandsOn3.CUDA.exe inputs-3
 ```
 
 and again with preconditioning disabled,
 
 ```bash
-mpiexec -n 1 -N 1 ./HandsOn3.exe inputs-3 use_preconditioner=0
+mpiexec -n 4 ./HandsOn3.CUDA.exe inputs-3 use_preconditioner=0
 ```
 
 Note that the preconditioned version takes longer to run on this coarse problem,
@@ -554,10 +559,10 @@ will deteriorate rapidly.
 
 ### Performance with Fully Implicit Integration
 
-Re-run `HandsOn3.exe` using a fully-implicit problem formulation,
+Re-run `HandsOn3.CUDA.exe` using a fully-implicit problem formulation,
 
 ```bash
-mpiexec -n 1 -N 1 ./HandsOn3.exe inputs-3 rhs_adv=1
+mpiexec -n 4 ./HandsOn3.CUDA.exe inputs-3 rhs_adv=1
 ```
 
 Recall that this preconditioner only "preconditions" the diffusion portion of
@@ -567,7 +572,7 @@ integrator statistics (number of time steps, total linear iterations, etc.)?
 
 ### Scalability Tests
 
-Explore the weak scalability of `HandsOn3.exe` both with and without
+Explore the weak scalability of `HandsOn3.CUDA.exe` both with and without
 preconditioning. Here, use from 1 to 256 MPI tasks, with a base grid of $$128^2$$
 per MPI task, and retain the default temporal adaptivity. The choice of IMEX vs
 fully implicit is yours. It is recommended that you submit a job script use the
