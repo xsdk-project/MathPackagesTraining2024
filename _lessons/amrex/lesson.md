@@ -51,7 +51,7 @@ rsync -a /eagle/ATPESC2024/EXAMPLES/track-5-numerical .
 
 3. Request an interactive session using the ATPESC2024 reservation:
 ```shell
-qsub -I -l select=1 -l filesystems=home:eagle -l walltime=1:00:00 -A ATPESC
+qsub -I -l select=1 -l filesystems=home:eagle -l walltime=1:00:00 -q ATPESC -A ATPESC2024
 ```
 
 5. Load the modules that setup the software environment for this track:
@@ -86,7 +86,7 @@ Vis can be finicky on Cooley because there are certain details that we need to s
 Recall, to get an interactive session, do, e.g.:
 
 ```shell
-qsub -I -n 1 -t 300 -A ATPESC2021 -q training
+qsub -I -n 1 -t 300 -A ATPESC2024 -q training
 ```
 
 - Then in the interactive session, edit your `~/.soft.cooley` file to contain only the following and then use the `resoft` command:
@@ -773,7 +773,7 @@ As before, to run the 3D code in serial:
 To run in parallel, for example on 4 ranks:
 
 ```shell
-mpirun -np 2 ./main3d.gnu.x86-milan.MPI.ex inputs
+mpirun -np 4 ./main3d.gnu.x86-milan.MPI.ex inputs
 ```
 
 Similar to the last example, the following parameters can be set at run-time -- these are currently set in the inputs file.
@@ -1126,6 +1126,8 @@ if you have run with 4 processes then you will see the particles displayed with 
 Download AMReX from GitHub [here](https://www.github.com/AMReX-codes/amrex).
 
 AMReX documentation/tutorials can be found [here](https://amrex-codes.github.io/amrex/)
+
+These example codes are [here](https://github.com/AMReX-Codes/ATPESC-codes)
 
 Read a Journal of Open Source Software (JOSS) paper on AMReX [here](http://joss.theoj.org/papers/10.21105/joss.01370)
 
