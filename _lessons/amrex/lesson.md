@@ -243,13 +243,13 @@ AmrCoreAdv::MakeNewLevelFromCoarse (int lev, Real time, const BoxArray& ba,
 To run the code navigate to the directory with your copy of the AMReX examples.
 
 ```shell
-cd {{site.handson_root}}/amrex/AMReX_Amr101/Exec
+cd ~/track-5-numerical/amrex/AMReX_Amr101/
 ```
 
-In this directory you'll see:
+In this directory you'll see (among a few other files):
 
 ```shell
-main3d.gnu.MPI.ex -- the 3D executable -- this has been built with MPI
+main3d.gnu.x86-milan.MPI.ex -- the 3D executable -- this has been built with MPI
 
 inputs -- a file specifying simulation parameters
 ```
@@ -257,13 +257,13 @@ inputs -- a file specifying simulation parameters
 To run in serial:
 
 ```shell
-./main3d.gnu.MPI.ex inputs
+./main3d.gnu.x86-milan.MPI.ex inputs
 ```
 
 To run in parallel, for example on 4 ranks:
 
 ```shell
-mpiexec -n 4 ./main3d.gnu.MPI.ex inputs
+mpirun -n 4 ./main3d.gnu.x86-milan.MPI.ex inputs
 ```
 
 
@@ -306,7 +306,7 @@ Total Time:
 
 and you can check conservation of $$\phi$$ by checking the line that prints, e.g.
 ```
-Coarse STEP 8 ends. TIME = 0.007031485953 DT = 0.0008789650903 Sum(Phi) = 540755.0014
+Coarse STEP 120 ends. TIME = 2 DT = 0.01043300719 Sum(Phi) = 33797.02895
 ```
 
 "Sum(Phi)" is the sum of $$\phi$$ over all the cells at the coarsest level.
@@ -316,7 +316,7 @@ Coarse STEP 8 ends. TIME = 0.007031485953 DT = 0.0008789650903 Sum(Phi) = 540755
 ### Visualizing the Results
 
 For convenience we created a python script powered by
-[ParaView 5.11](https://gitlab.kitware.com/paraview/paraview/-/tags/v5.11.1)
+[ParaView 5.13](https://gitlab.kitware.com/paraview/paraview/-/tags/v5.13.0-RC1)
 to render the AMReX plotfiles. [FFmpeg](https://ffmpeg.org/) is then used to stitch the images into a movie
 and gif. To generate a movie from the plotfiles type:
 
@@ -325,11 +325,11 @@ pvbatch paraview_amr101.py
 ```
 
 This will generate two files, `amr101_3D.avi` and `amr101_3D.gif`.
-To view the files you can copy them to your local machine and view
-them with scp. Open a terminal on your local machine and move the folder where you want
+To view the files you can copy them to your local machine with scp.
+Open a terminal on your local machine and move the folder where you want
 to download the mp4 and gif. Then type:
 ```shell
-scp elvis@theta.alcf.anl.gov:~/track-5-numerical/amrex/AMReX_Amr101/Exec/amr101_3D\* .
+scp elvis@polaris.alcf.anl.gov:~/track-5-numerical/amrex/AMReX_Amr101/amr101_3D\* .
 ```
 
 Escaping the wildcard with `\` is necessary on some shells.
@@ -341,10 +341,10 @@ The image below shows a slice through a 3D run with 64x64x8 cells at the coarses
 To plot the files manually with a local copy of ParaView see the details below:
 
 <details>
-<strong>Using ParaView 5.11.1 Manually with Downloaded Plotfiles</strong>
+<strong>Using ParaView 5.13.0-RC1 Manually with Downloaded Plotfiles</strong>
 
 <p>
-To do the same thing with ParaView 5.11.1 manually (if, e.g. you have the plotfiles
+To do the same thing with ParaView 5.13.0-RC1 manually (if, e.g. you have the plotfiles
 on your local machine and want to experiment):
 </p>
 
@@ -508,7 +508,7 @@ will be done on the GPU. AMReX functionality is flexible enough that this can
 be adapted for NVidia, AMD, or Intel GPUs _without code changes_.
 
 
-For convenience, there is a binary pre-compiled with CUDA support in the `AMReX_Amr101/Exec`
+For convenience, there is a binary pre-compiled with CUDA support in the `AMReX_Amr101/`
 folder, `./main3d.gnu.CUDA.MPI.ex`. If one wanted to compile the source code with CUDA,
 the command would be:
 
@@ -646,7 +646,7 @@ Notes:
 * What happens as you change the max grid size for decomposition?
 
 * What happens as you change the refinement criteria (i.e. use different values of $$\phi$$)?
-  (You can edit these in inputs)  
+  (You can edit these in inputs)
 
 
 -- end subcycling -->
@@ -673,7 +673,7 @@ Next we will add complexity with particles and embedded boundaries (EB).
 ### Mathematical Problem Formulation
 
 Recall our previous problem of the drop of dye in a thin incompressible fluid that is spinning
-clock-wise then counter-clockwise with a prescribed motion.  
+clock-wise then counter-clockwise with a prescribed motion.
 
 Now instead of advecting the dye as a scalar quantity defined on the mesh (the
 continuum representation), we define the dye as a collection of particles that
@@ -753,13 +753,13 @@ advection.
 To run the code navigate to the directory with your copy of the AMReX examples.
 
 ```shell
-cd {{site.handson_root}}/amrex/AMReX_Amr102/Exec
+cd ~/track-5-numerical/amrex/AMReX_Amr102/
 ```
 
 In this directory you'll see
 
 ```shell
-main3d.gnu.MPI.ex -- the 3D executable -- this has been built with MPI
+main3d.gnu.x86-milan.MPI.ex -- the 3D executable -- this has been built with MPI
 
 inputs -- an inputs file
 ```
@@ -767,13 +767,13 @@ inputs -- an inputs file
 As before, to run the 3D code in serial:
 
 ```shell
-./main3d.gnu.MPI.ex inputs
+./main3d.gnu.x86-milan.MPI.ex inputs
 ```
 
 To run in parallel, for example on 4 ranks:
 
 ```shell
-mpiexec -n 4 ./main3d.gnu.MPI.ex inputs
+mpirun -np 2 ./main3d.gnu.x86-milan.MPI.ex inputs
 ```
 
 Similar to the last example, the following parameters can be set at run-time -- these are currently set in the inputs file.
@@ -853,24 +853,24 @@ To view the files you can copy them to your local machine and view
 them with scp. Open a terminal on your local machine and move the folder where you want
 to download the mp4 and gif. Then type:
 ```shell
-scp elvis@theta.alcf.anl.gov:~/track-5-numerical/amrex/AMReX_Amr102/Exec/amr102_3D\* .
+scp elvis@polaris.alcf.anl.gov:~/track-5-numerical/amrex/AMReX_Amr102/amr102_3D\* .
 ```
 
 Notes:
 
 - To delete old plotfiles before a new run, do `rm -rf plt*`
 
-- You can do `realpath amr102_3D.gif` to get the movie's path on ThetaGPU and then copy it to your local
-  machine by doing `scp [username]@theta.alcf.anl.gov:[path-to-gif] .`
+- You can do `realpath amr102_3D.gif` to get the movie's path on Polaris and then copy it to your local
+  machine by doing `scp [username]@polaris.alcf.anl.gov:[path-to-gif] .`
 
 
 If you're interested in generating the movies manually, see the details below.
 <details>
 
-<strong>Using ParaView 5.11 Manually</strong>
+<strong>Using ParaView 5.13 Manually</strong>
 
 <p>
-To do the same thing with ParaView 5.11 manually (if, e.g. you have the plotfiles
+To do the same thing with ParaView 5.13.0-RC1 manually (if, e.g. you have the plotfiles
 on your local machine and want to experiment):
 </p>
 
@@ -951,13 +951,13 @@ Your goal here is to see if you can cover the floor of the pachinko machine.
 
 The code is located in your copy of the AMReX examples at:
 ```
-cd {{site.handson_root}}/amrex/AMReX_EB_Pachinko
+cd ~/track-5-numerical/amrex/AMReX_EB_Pachinko
 ```
 
 In this directory you'll see
 
 ```
-main3d.gnu.MPI.ex    -- the executable -- this has been built with MPI
+main3d.gnu.x86-milan.MPI.ex    -- the executable -- this has been built with MPI
 
 inputs_3d            -- domain size, size of grids, how many time steps, which obstacles...
 
@@ -978,13 +978,13 @@ initial_particles_3d file.
 To run in serial,
 
 ```
-./main3d.gnu.MPI.ex inputs_3d
+./main3d.gnu.x86-milan.MPI.ex inputs_3d
 ```
 
 To run in parallel, for example on 4 ranks:
 
 ```
-mpiexec -n 4 ./main3d.gnu.MPI.ex inputs_3d
+mpirun -np 4 ./main3d.gnu.x86-milan.MPI.ex inputs_3d
 ```
 
 The following parameters can be set at run-time -- these are currently set in the inputs_3d file.
@@ -1006,7 +1006,7 @@ max_steps = 100000                    # the maximum number of steps (if max_step
 
 You can also set values on the command line; for example,
 ```
-mpiexec -n 4 ./main3d.gnu.MPI.ex inputs_3d particle_file=my_file
+mpirun -np 4 ./main3d.gnu.x86-milan.MPI.ex inputs_3d particle_file=my_file
 ```
 
 will read the particles from a file called "my_file"
@@ -1042,7 +1042,7 @@ To view the files you can copy them to your local machine and view
 them with scp. Open a terminal on your local machine and move the folder where you want
 to download the mp4 and gif. Then type:
 ```shell
-scp elvis@theta.alcf.anl.gov:~/track-5-numerical/amrex/AMReX_EB_Pachinko/pachinko\* .
+scp elvis@polaris.alcf.anl.gov:~/track-5-numerical/amrex/AMReX_EB_Pachinko/pachinko\* .
 ```
 
 If you're interested in generating the movies manually, see the details below.
@@ -1068,7 +1068,7 @@ Instructions to visualize the EB representation of the cylinders:
 </p>
 
 <ol>
-<li>Start ParaView 5.11</li>
+<li>Start ParaView 5.13</li>
 <li>File --> Open ... select "eb.pvtp" (highlight it then click OK)</li>
 <li>Click green Apply button</li>
 </ol>
