@@ -40,7 +40,7 @@ header:
 
 1. Log into the Theta login node with your username (replace "elvis"):
 ```shell
-ssh -A elvis@theta.alcf.anl.gov
+ssh -A elvis@polaris.alcf.anl.gov
 ```
 
 2. In your home folder, create a local copy of the track 5 numerical examples:
@@ -49,19 +49,16 @@ cd ~
 rsync -a /eagle/ATPESC2024/EXAMPLES/track-5-numerical .
 ```
 
-3. To access ThetaGPU resources, transfer to a GPU service node:
+3. Request an interactive session using the ATPESC2024 reservation:
 ```shell
-ssh thetagpusn1 # or thetagpusn2
+qsub -I -l select=1 -l filesystems=home:eagle -l walltime=1:00:00 -A ATPESC
 ```
 
-4. From the GPU service node, request a single-gpu reservation:
+5. Load the modules that setup the software environment for this track:
 ```shell
-qsub --attrs=filesystems=home,eagle -I -q single-gpu -t 60 -n 1 -A ATPESC2024
-```
-
-5. Load OpenMPI:
-```shell
-module load openmpi/openmpi-4.1.4_ucx-1.14.0_gcc-9.4.0_cuda-11.8
+module use /soft/modulefiles
+module use /eagle/ATPESC2024/usr/modulefiles
+module load track-5-numerical
 ```
 
 6. Change to the AMReX examples directory:
@@ -69,7 +66,7 @@ module load openmpi/openmpi-4.1.4_ucx-1.14.0_gcc-9.4.0_cuda-11.8
 cd track-5-numerical/amrex
 ```
 
-7. Setup several environment variables and path by
+7. Setup some additional environment variables needed to use Paraview by
 sourcing the `env_setup_amrex.sh` script:
 ```shell
 source env_setup_amrex.sh
