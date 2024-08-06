@@ -119,7 +119,7 @@ model linear problem.
 
 ### Krylov Solvers & Algebraic Multigrid (with HYPRE)
 ### Krylov Solvers & Algebraic Multigrid (with HYPRE)
-[Slides](../files/ATPESC-2024-Track-5-OsbornYang-Iterative-Solvers-hypre.pdf)
+[Slides](../files/ATPESC-2024-Track-5-Iterative-Solvers-hypre-DOK.pdf)
 
 This session will present the basic concepts of iterative linear solvers with focus on
 Krylov solvers, including the generalized minimum residual method (GMRES),
