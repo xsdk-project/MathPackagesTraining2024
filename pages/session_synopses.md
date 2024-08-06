@@ -58,7 +58,7 @@ mesh tools developed to support mesh adaptation, load balancing and PIC calculat
 
 ### Nonlinear Solvers (with PETSc)
 ### Nonlinear Solvers (with PETSc)
-[Slides](../files/ATPESC-2024-Track-5-RichardTranMills-NonlinearSolversUsingPETSc.pdf)
+[Slides](../files/ATPESC-2024-Track-5-TobyIsaac-PETSc.pdf)
 
 We will begin with a quick overview of iterative solvers for nonlinear systems,
 and then take a deeper look into Newton-Krylov methods and how to use them via
@@ -136,7 +136,7 @@ from the HYPRE library applied to several test problems on CPUs and GPUs.
 
 ### Optimization (with TAO)
 ### Optimization (with TAO)
-[Slides](../files/ATPESC-2024-Track-5-Isaac-numerical-optimization-tao.pdf)
+[Slides](../files/ATPESC-2024-Track-5-ToddMunson-TAO.pdf)
 
 This lecture will provide an introduction to numerical optimization with a
 theoretical focus on simulation-based problems. We will introduce the user
