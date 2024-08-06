@@ -690,8 +690,7 @@ converge to the now-global minimum at $$f(-0.62, 0.38)=2.62$$ regardless of the 
 
 ## Further Reading
 
-- [TAO manual](https://petsc.org/release/documentation/manual/tao/)
-- [PETSc manual](https://petsc.org/release/documentation/manual/)
+- [PETSc/TAO manual](https://petsc.org/release/manual/)
 
 ## Previous Optimization Lectures
 - [ATPESC 2020](https://xsdk-project.github.io/MathPackagesTraining2020/lessons/multidim_rosenbrock_tao/)

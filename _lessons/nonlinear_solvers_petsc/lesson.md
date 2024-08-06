@@ -778,7 +778,7 @@ Otherwise, you may get unexpected behavior from executables that link against PE
 
 ## Further Reading
 
-- [PETSc manual](https://petsc.org/release/documentation/manual/)
+- [PETSc/TAO manual](https://petsc.org/release/manual/)
 - [PETSc/TAO website](https://petsc.org/release/)
 - [*Composing Scalable Nonlinear Algebraic Solvers*](https://arxiv.org/abs/1607.04254)
 - [*Toward Performance-Portable PETSc for GPU-based Exascale Systems*](https://arxiv.org/abs/2011.00715)
