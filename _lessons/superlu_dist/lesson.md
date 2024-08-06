@@ -15,7 +15,7 @@ header:
 
 - Enter the lesson directory
 ```
-cd {{site.handson_root}}/superlu_dist_9.0.0
+cd {{site.handson_root}}/superlu_dist
 ```
 
 There are two folders:
