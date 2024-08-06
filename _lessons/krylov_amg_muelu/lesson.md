@@ -32,7 +32,9 @@ header:
 <!-- * [Open the Answers Form]({{page.answers_google_form}}) -->
 Make sure that you have followed the [setup instructions]({{site.url}}/{{site.baseurl}}/setup_instructions/).
 
-As we will be using a GPU enabled executable, we will be running on ThetaGPU.
+[Slides](../../files/ATPESC-2024-Track-5-GlusaHarper-IterativeLinearSolversAndAlgebraicMultigridWithTrilinosBelosMueLu.pdf)
+
+As we will be using a GPU enabled executable, we will be running on Polaris.
 
 Go to the directory for the Krylov application, and make sure the appropriate modules are loaded
 ```
